@@ -3,6 +3,7 @@ import React from "react";
 import { SetupCamera } from "./lib/function/Camera";
 import { SetupLight } from "./lib/function/Light";
 import { SetupModel } from "./lib/function/Model";
+import GlovalStyle from "./styles/styles";
 
 const THREE = require("three");
 
@@ -35,7 +36,20 @@ class App extends React.Component {
     this.scene.add(light);
     this.scene.add(model.solarSystem);
 
+    window.onresize = this.resize.bind(this); // bind인 이유는 이벤트 객체가 아닌 App클래스의 객체가 되기 위해서
+    this.resize();
+
     this.animate();
+  }
+
+  resize() {
+    const width = this.element.clientWidth;
+    const height = this.element.clientHeight; // this._divContainer의 가로 세로 길이 구하기
+
+    this.camera.aspect = width / height;
+    this.camera.updateProjectionMatrix(); // camera 속성 값 설정
+
+    this.renderer.setSize(width, height); // renderer의 크기 설정
   }
 
   animate = (time) => {
@@ -52,10 +66,19 @@ class App extends React.Component {
 
   render() {
     return (
-      <div
-        ref={(el) => (this.element = el)}
-        style={{ width: "100%", height: "100%" }}
-      ></div>
+      <>
+        <GlovalStyle/>
+        <div
+          ref={(el) => (this.element = el)}
+          style={{
+            position: "absolute",
+            top: "0",
+            left: "0",
+            width: "100%",
+            height: "100%",
+          }}
+        ></div>
+      </>
     );
   }
 }
