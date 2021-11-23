@@ -1,11 +1,20 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-useless-constructor */
 import React from "react";
 import { SetupCamera } from "./lib/function/Camera";
 import { SetupLight } from "./lib/function/Light";
 import { SetupModel } from "./lib/function/Model";
 import GlovalStyle from "./styles/styles";
-
-const THREE = require("three");
+import * as THREE from "three";
+import {
+  Canvas,
+  useLoader,
+  useFrame,
+  extend,
+  useThree,
+} from "react-three-fiber";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 class App extends React.Component {
   constructor(props) {
@@ -33,14 +42,18 @@ class App extends React.Component {
     const model = SetupModel();
     this.model = model;
 
+    new OrbitControls(this.camera, this.element);
+
     this.scene.add(light);
-    this.scene.add(model.solarSystem);
+    this.scene.add(model);
 
     window.onresize = this.resize.bind(this); // bind인 이유는 이벤트 객체가 아닌 App클래스의 객체가 되기 위해서
     this.resize();
 
     this.animate();
   }
+
+  setupControls() {}
 
   resize() {
     const width = this.element.clientWidth;
@@ -60,14 +73,13 @@ class App extends React.Component {
 
   update(time) {
     time *= 0.001;
-    this.model.solarSystem.rotation.y = (time / 5) * 1.3;
-    this.model.earthOrbit.rotation.y = time * 2.6;
+    this.model.rotation.y = (time / 5) * 1.3;
   }
 
   render() {
     return (
       <>
-        <GlovalStyle/>
+        <GlovalStyle />
         <div
           ref={(el) => (this.element = el)}
           style={{
