@@ -1,11 +1,12 @@
 /* eslint-disable no-useless-constructor */
 import React from "react";
-import * as THREE from "three";
 import { SetupCamera } from "./lib/function/Camera";
 import { SetupLight } from "./lib/function/Light";
 import { SetupModel } from "./lib/function/Model";
 
-class Viewer extends React.Component {
+const THREE = require("three");
+
+class App extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -32,7 +33,7 @@ class Viewer extends React.Component {
     this.model = model;
 
     this.scene.add(light);
-    this.scene.add(model);
+    this.scene.add(model.solarSystem);
 
     this.animate();
   }
@@ -45,8 +46,8 @@ class Viewer extends React.Component {
 
   update(time) {
     time *= 0.001;
-    this.model.rotation.x = time;
-    this.model.rotation.y = time;
+    this.model.solarSystem.rotation.y = (time / 5) * 1.3;
+    this.model.earthOrbit.rotation.y = time * 2.6;
   }
 
   render() {
@@ -59,4 +60,4 @@ class Viewer extends React.Component {
   }
 }
 
-export default Viewer;
+export default App;
