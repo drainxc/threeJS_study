@@ -1,9 +1,9 @@
 /* eslint-disable no-useless-constructor */
 import React from "react";
 import * as THREE from "three";
-import { SetupCamera } from "./lib/function/camera";
-import { SetupLight } from "./lib/function/light";
-import { SetupModel } from "./lib/function/model";
+import { SetupCamera } from "./lib/function/Camera";
+import { SetupLight } from "./lib/function/Light";
+import { SetupModel } from "./lib/function/Model";
 
 class Viewer extends React.Component {
   constructor(props) {
