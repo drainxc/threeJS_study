@@ -31,6 +31,7 @@ class App extends React.Component {
     this.renderer = renderer;
 
     const scene = new THREE.Scene();
+    scene.background = new THREE.Color('black');
     this.scene = scene;
 
     const camera = SetupCamera(this.element);
@@ -44,8 +45,9 @@ class App extends React.Component {
 
     new OrbitControls(this.camera, this.element);
 
-    this.scene.add(light);
-    this.scene.add(light.target);
+    this.scene.add(light.light1);
+    this.scene.add(light.light2);
+    this.scene.add(light.light2.target);
     // this.scene.add(model.solarSystem);
 
     const gltfLoader = new GLTFLoader();
