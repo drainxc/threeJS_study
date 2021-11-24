@@ -45,7 +45,16 @@ class App extends React.Component {
     new OrbitControls(this.camera, this.element);
 
     this.scene.add(light);
-    this.scene.add(model);
+    this.scene.add(light.target);
+    // this.scene.add(model.solarSystem);
+
+    const gltfLoader = new GLTFLoader();
+    const url = "https://threejsfundamentals.org/threejs/resources/models/cartoon_lowpoly_small_city_free_pack/scene.gltf"
+    gltfLoader.load(url, (gltf) => {
+      const root = gltf.scene;
+      console.log(gltf);
+      this.scene.add(root)
+    });
 
     window.onresize = this.resize.bind(this); // bind인 이유는 이벤트 객체가 아닌 App클래스의 객체가 되기 위해서
     this.resize();
@@ -73,7 +82,8 @@ class App extends React.Component {
 
   update(time) {
     time *= 0.001;
-    this.model.rotation.y = (time / 5) * 1.3;
+    this.model.solarSystem.rotation.y = (time / 5) * 1.3;
+    this.model.earthOrbit.rotation.y = time * 2.6;
   }
 
   render() {
