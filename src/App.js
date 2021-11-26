@@ -16,6 +16,7 @@ import {
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { SetupControls } from "./lib/function/Controls";
+import { useGLTF } from "@react-three/drei";
 
 class App extends React.Component {
   constructor(props) {
@@ -52,8 +53,7 @@ class App extends React.Component {
     // this.scene.add(model.solarSystem);
 
     const gltfLoader = new GLTFLoader();
-    const url =
-      "https://threejsfundamentals.org/threejs/resources/models/cartoon_lowpoly_small_city_free_pack/scene.gltf";
+    const url = "scene.gltf";
     gltfLoader.load(url, (gltf) => {
       const root = gltf.scene;
       console.log(gltf);
