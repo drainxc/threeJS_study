@@ -13,10 +13,8 @@ import {
   extend,
   useThree,
 } from "react-three-fiber";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { SetupControls } from "./lib/function/Controls";
-import { useGLTF } from "@react-three/drei";
+import { GlftLoader } from "./lib/function/glftLoader";
 
 class App extends React.Component {
   constructor(props) {
@@ -52,13 +50,7 @@ class App extends React.Component {
     this.scene.add(light.light2.target);
     // this.scene.add(model.solarSystem);
 
-    const gltfLoader = new GLTFLoader();
-    const url = "scene.gltf";
-    gltfLoader.load(url, (gltf) => {
-      const root = gltf.scene;
-      console.log(gltf);
-      this.scene.add(root);
-    });
+    GlftLoader(this.scene);
 
     window.onresize = this.resize.bind(this); // bind인 이유는 이벤트 객체가 아닌 App클래스의 객체가 되기 위해서
     this.resize();
