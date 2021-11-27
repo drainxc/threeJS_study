@@ -106,7 +106,8 @@ class App extends React.Component {
     time *= 0.001;
     if (this.planet) {
       for (const model of this.planet.children) {
-        model.rotation.y = time;
+        if (model !== this.planet.children[15])
+          model.rotation.y = time;
       }
     }
   }
