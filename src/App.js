@@ -65,7 +65,7 @@ class App extends React.Component {
       console.log(gltf);
       this.scene.add(root);
       console.log(this.dumpObject(root).join("\n"));
-      const planet = root.getObjectByName("Sol1");
+      const planet = root.getObjectByName("GLTF_SceneRootNode");
       this.planet = planet;
     });
   }
@@ -106,7 +106,7 @@ class App extends React.Component {
     time *= 0.001;
     if (this.planet) {
       for (const model of this.planet.children) {
-        model.rotation.x = time;
+        model.rotation.y = time;
       }
     }
   }
