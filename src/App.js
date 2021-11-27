@@ -14,7 +14,7 @@ import {
   useThree,
 } from "react-three-fiber";
 import { SetupControls } from "./lib/function/Controls";
-import { GlftLoader } from "./lib/function/glftLoader";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 class App extends React.Component {
   constructor(props) {
@@ -48,14 +48,42 @@ class App extends React.Component {
     this.scene.add(light.light1);
     this.scene.add(light.light2);
     this.scene.add(light.light2.target);
-    // this.scene.add(model.solarSystem);
 
-    GlftLoader(this.scene);
+    this.GlftLoader();
 
     window.onresize = this.resize.bind(this); // bind인 이유는 이벤트 객체가 아닌 App클래스의 객체가 되기 위해서
     this.resize();
 
     this.animate();
+  }
+
+  GlftLoader() {
+    const gltfLoader = new GLTFLoader();
+    const url = "scene.gltf";
+    gltfLoader.load(url, (gltf) => {
+      const root = gltf.scene;
+      console.log(gltf);
+      this.scene.add(root);
+      console.log(this.dumpObject(root).join("\n"));
+      const planet = root.getObjectByName("Sol1");
+      this.planet = planet;
+    });
+  }
+
+  dumpObject(obj, lines = [], isLast = true, prefix = "") {
+    const localPrefix = isLast ? "└─" : "├─";
+    lines.push(
+      `${prefix}${prefix ? localPrefix : ""}${obj.name || "*no-name*"} [${
+        obj.type
+      }]`
+    );
+    const newPrefix = prefix + (isLast ? "  " : "│ ");
+    const lastNdx = obj.children.length - 1;
+    obj.children.forEach((child, ndx) => {
+      const isLast = ndx === lastNdx;
+      this.dumpObject(child, lines, isLast, newPrefix);
+    });
+    return lines;
   }
 
   resize() {
@@ -76,8 +104,11 @@ class App extends React.Component {
 
   update(time) {
     time *= 0.001;
-    this.model.solarSystem.rotation.y = (time / 5) * 1.3;
-    this.model.earthOrbit.rotation.y = time * 2.6;
+    if (this.planet) {
+      for (const model of this.planet.children) {
+        model.rotation.x = time;
+      }
+    }
   }
 
   render() {
