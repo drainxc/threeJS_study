@@ -59,6 +59,7 @@ class App extends React.Component {
     gltfLoader.load(url, (gltf) => {
       const root = gltf.scene;
       console.log(gltf);
+      // this.scene.add(root);
       console.log(this.dumpObject(root).join("\n"));
       const planet = root.getObjectByName("GLTF_SceneRootNode");
       this.planet = planet;
@@ -99,19 +100,12 @@ class App extends React.Component {
       earthMesh.scale.set(20,20,20);
       earth.add(earthMesh);
 
-      // const earthOrbit = new THREE.Object3D();
-      // earthOrbit.position.x = 10;
-      // solarSystem.add(earthOrbit);
-
-      // const earthGeometry = new THREE.SphereGeometry(0.5, 12, 12);
-      // const earthMaterial = new THREE.MeshPhongMaterial({
-      //   color: 0x005fff,
-      //   emissive: 0x005fff,
-      //   fletShading: true,
-      // });
-      // const earth = new THREE.Mesh(earthGeometry, earthMaterial);
-      // earth.scale.set(3, 3, 3);
-      // earthOrbit.add(earth);
+      const moonOrbit = new THREE.Object3D();
+      earth.add(moonOrbit);
+      const moonMesh = this.planet.children[9];
+      moonMesh.position.z = -18;
+      moonMesh.scale.set(2,2,2);
+      moonOrbit.add(moonMesh);
 
       // const moonOrbit = new THREE.Object3D();
       // moonOrbit.position.x = 2.5;
