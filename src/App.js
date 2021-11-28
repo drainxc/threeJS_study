@@ -59,6 +59,7 @@ class App extends React.Component {
     const url = "scene.gltf"; // gltf가 있는 장소
     gltfLoader.load(url, (gltf) => {
       const root = gltf.scene;
+      this.root = root;
       console.log(gltf);
       // this.scene.add(root);
       console.log(this.dumpObject(root).join("\n")); // gltf의 자식
@@ -103,8 +104,10 @@ class App extends React.Component {
       mercuryOrbit.add(mercuryMesh); // 수성
 
       const venusOrbit = new THREE.Object3D();
+      this.venusOrbit = venusOrbit;
       solarSystem.add(venusOrbit);
       const venusMesh = this.planet.children[1];
+      this.venusMesh = venusMesh;
       venusMesh.position.set(415, 0, 0);
       venusMesh.scale.set(22, 22, 22);
       venusOrbit.add(venusMesh); // 금성
@@ -124,6 +127,15 @@ class App extends React.Component {
       moonMesh.position.set(20, 0, 0);
       moonMesh.scale.set(2.5, 2.5, 2.5);
       earth.add(moonMesh); // 달
+
+      const marsOrbit = new THREE.Object3D();
+      this.marsOrbit = marsOrbit;
+      solarSystem.add(marsOrbit);
+      const marsMesh = this.planet.children[0];
+      this.marsMesh = marsMesh;
+      marsMesh.position.set(654, 0, 0);
+      marsMesh.scale.set(22, 22, 22);
+      marsOrbit.add(marsMesh);
 
       this.scene.add(solarSystem);
     }
