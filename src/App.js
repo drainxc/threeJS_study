@@ -87,7 +87,7 @@ class App extends React.Component {
       const sunMesh = this.planet.children[8]; // 모델 추가
       this.sunMesh = sunMesh;
       sunMesh.position.set(0, 0, 0); // 위치
-      sunMesh.scale.set(4, 4, 4);
+      sunMesh.scale.set(5, 5, 5);
       solarSystem.add(sunMesh); // 태양
 
       const mercuryOrbit = new THREE.Object3D(); // 공전
@@ -145,17 +145,17 @@ class App extends React.Component {
       const saturnOrbit = new THREE.Object3D();
       this.saturnOrbit = saturnOrbit;
       solarSystem.add(saturnOrbit);
-      const saturn = new THREE.Object3D(); // 화성 고리 + 화성
+      const saturn = new THREE.Object3D(); // 토성 고리 + 토성
       this.saturn = saturn;
       saturn.position.set(2378, 0, 0);
       saturnOrbit.add(saturn);
       const saturnMesh = this.planet.children[0];
       saturnMesh.scale.set(16, 16, 16);
-      saturn.add(saturnMesh); // 화성
+      saturn.add(saturnMesh); // 토성
       const saturnRingMesh = this.planet.children[6];
       saturnRingMesh.scale.set(16, 16, 16);
       saturnRingMesh.rotation.x = 10;
-      saturn.add(saturnRingMesh); // 화성 고리
+      saturn.add(saturnRingMesh); // 토성 고리
 
       const uranusOrbit = new THREE.Object3D();
       this.uranusOrbit = uranusOrbit;
@@ -164,9 +164,17 @@ class App extends React.Component {
       this.uranusMesh = uranusMesh;
       uranusMesh.position.set(3078, 0, 0);
       uranusMesh.scale.set(16, 16, 16);
-      uranusOrbit.add(uranusMesh);
+      uranusOrbit.add(uranusMesh); // 천왕성 
 
-      console.log(this.dumpObject(this.root).join("\n")); // gltf의 자식
+      const neptuneOrbit = new THREE.Object3D();
+      this.neptuneOrbit = neptuneOrbit;
+      solarSystem.add(neptuneOrbit);
+      const neptuneMesh = this.planet.children[0];
+      this.neptuneMesh = neptuneMesh;
+      neptuneMesh.position.set(3678, 0, 0);
+      neptuneMesh.scale.set(16, 16, 16);
+      neptuneOrbit.add(neptuneMesh); // 해왕성
+
       this.scene.add(solarSystem);
     }
   }
