@@ -90,7 +90,15 @@ class App extends React.Component {
       solarSystem.add(solarOrbit);
       const sunMesh = this.planet.children[8];
       solarOrbit.add(sunMesh);
-      
+
+      const earthOrbit = new THREE.Object3D();
+      solarSystem.add(earthOrbit);
+      const earth = new THREE.Object3D();
+      solarOrbit.add(earth);
+      const earthMesh = this.planet.children[0];
+      earthMesh.scale.set(20,20,20);
+      earth.add(earthMesh);
+
       // const earthOrbit = new THREE.Object3D();
       // earthOrbit.position.x = 10;
       // solarSystem.add(earthOrbit);
