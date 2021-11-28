@@ -3,7 +3,6 @@
 import React from "react";
 import { SetupCamera } from "./lib/function/Camera";
 import { SetupLight } from "./lib/function/Light";
-import { SetupModel } from "./lib/function/Model";
 import GlovalStyle from "./styles/styles";
 import * as THREE from "three";
 import {
@@ -39,9 +38,6 @@ class App extends React.Component {
 
     const light = SetupLight();
     this.light = light;
-
-    const model = SetupModel();
-    this.model = model;
 
     SetupControls(this.camera, this.element);
 
@@ -86,6 +82,47 @@ class App extends React.Component {
     return lines;
   }
 
+  setupModel() {
+    if (this.planet) {
+      const solarSystem = new THREE.Object3D();
+      const sun = sun.scale.set(3, 3, 3);
+      solarSystem.add(sun);
+
+      const earthOrbit = new THREE.Object3D();
+      earthOrbit.position.x = 10;
+      solarSystem.add(earthOrbit);
+
+      const earthGeometry = new THREE.SphereGeometry(0.5, 12, 12);
+      const earthMaterial = new THREE.MeshPhongMaterial({
+        color: 0x005fff,
+        emissive: 0x005fff,
+        fletShading: true,
+      });
+      const earth = new THREE.Mesh(earthGeometry, earthMaterial);
+      earth.scale.set(3, 3, 3);
+      earthOrbit.add(earth);
+
+      const moonOrbit = new THREE.Object3D();
+      moonOrbit.position.x = 2.5;
+      earthOrbit.add(moonOrbit);
+
+      const moonGeometry = new THREE.SphereGeometry(0.2, 12, 12);
+      const moonMaterial = new THREE.MeshPhongMaterial({
+        color: 0x888888,
+        emissive: 0x222222,
+        flatShading: true,
+      });
+      const moon = new THREE.Mesh(moonGeometry, moonMaterial);
+      moon.scale.set(3.3, 3.3, 3.3);
+      moonOrbit.add(moon);
+
+      const model = {
+        solarSystem: solarSystem,
+        earthOrbit: earthOrbit,
+      };
+    }
+  }
+
   resize() {
     const width = this.element.clientWidth;
     const height = this.element.clientHeight; // this._divContainer의 가로 세로 길이 구하기
@@ -106,8 +143,7 @@ class App extends React.Component {
     time *= 0.001;
     if (this.planet) {
       for (const model of this.planet.children) {
-        if (model !== this.planet.children[15])
-          model.rotation.y = time;
+        if (model !== this.planet.children[15]) model.rotation.y = time;
       }
     }
   }
