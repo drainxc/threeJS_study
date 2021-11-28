@@ -88,6 +88,10 @@ class App extends React.Component {
 
   setupModel() {
     if (this.planet) {
+      const backGround = this.planet.children[15];
+      backGround.scale.set(5000, 5000, 5000);
+      this.scene.add(backGround);
+
       const solarSystem = new THREE.Object3D(); // 태양계 생성
       const sunMesh = this.planet.children[8]; // 모델 추가
       this.sunMesh = sunMesh;
