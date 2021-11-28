@@ -88,18 +88,18 @@ class App extends React.Component {
   setupModel() {
     if (this.planet) {
       const solarSystem = new THREE.Object3D(); // 태양계 생성
-      const sunMesh = this.planet.children[8]; // 태양 추가
+      const sunMesh = this.planet.children[8]; // 모델 추가
       this.sunMesh = sunMesh;
-      sunMesh.position.set(0, 0, 0); // 태양 위치
+      sunMesh.position.set(0, 0, 0); // 위치
       solarSystem.add(sunMesh); // 태양
 
-      const mercuryOrbit = new THREE.Object3D(); // 수성 공전
+      const mercuryOrbit = new THREE.Object3D(); // 공전
       this.mercuryOrbit = mercuryOrbit;
       solarSystem.add(mercuryOrbit); // 태양계에 소속
-      const mercuryMesh = this.planet.children[2]; // 수성 추가
+      const mercuryMesh = this.planet.children[2];
       this.mercuryMesh = mercuryMesh;
-      mercuryMesh.position.set(315, 0, 0); // 수성 위치
-      mercuryMesh.scale.set(25, 25, 25); // 수성 크기
+      mercuryMesh.position.set(315, 0, 0);
+      mercuryMesh.scale.set(25, 25, 25); // 크기
       mercuryOrbit.add(mercuryMesh); // 수성
 
       const venusOrbit = new THREE.Object3D();
