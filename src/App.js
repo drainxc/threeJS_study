@@ -5,16 +5,8 @@ import { SetupCamera } from "./lib/function/Camera";
 import { SetupLight } from "./lib/function/Light";
 import GlovalStyle from "./styles/styles";
 import * as THREE from "three";
-import {
-  Canvas,
-  useLoader,
-  useFrame,
-  extend,
-  useThree,
-} from "react-three-fiber";
 import { SetupControls } from "./lib/function/Controls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { Object3D } from "three";
 
 class App extends React.Component {
   constructor(props) {
