@@ -147,15 +147,24 @@ class App extends React.Component {
       solarSystem.add(saturnOrbit);
       const saturn = new THREE.Object3D(); // 화성 고리 + 화성
       this.saturn = saturn;
-      saturn.position.set(2478, 0, 0);
+      saturn.position.set(2378, 0, 0);
       saturnOrbit.add(saturn);
       const saturnMesh = this.planet.children[0];
       saturnMesh.scale.set(16, 16, 16);
       saturn.add(saturnMesh); // 화성
       const saturnRingMesh = this.planet.children[6];
-      saturnRingMesh.scale.set(16,16,16);
+      saturnRingMesh.scale.set(16, 16, 16);
       saturnRingMesh.rotation.x = 10;
       saturn.add(saturnRingMesh); // 화성 고리
+
+      const uranusOrbit = new THREE.Object3D();
+      this.uranusOrbit = uranusOrbit;
+      solarSystem.add(uranusOrbit);
+      const uranusMesh = this.planet.children[0];
+      this.uranusMesh = uranusMesh;
+      uranusMesh.position.set(3078, 0, 0);
+      uranusMesh.scale.set(16, 16, 16);
+      uranusOrbit.add(uranusMesh);
 
       console.log(this.dumpObject(this.root).join("\n")); // gltf의 자식
       this.scene.add(solarSystem);
