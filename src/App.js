@@ -23,49 +23,49 @@ class App extends React.Component {
 
   componentDidMount() {
     const width = window.innerWidth - 1;
-    const height = window.innerHeight - 1;
+    const height = window.innerHeight - 1; // 창크기
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(width, height);
     this.element.appendChild(renderer.domElement);
-    this.renderer = renderer;
+    this.renderer = renderer; // 렌더링
 
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color("black");
-    this.scene = scene;
+    const scene = new THREE.Scene(); // Scene
+    scene.background = new THREE.Color("black"); // Scene 색상
+    this.scene = scene; // field로 정의
 
-    const camera = SetupCamera(this.element);
+    const camera = SetupCamera(this.element); // 카메라 추가
     this.camera = camera;
 
-    const light = SetupLight();
+    const light = SetupLight(); // 광원 추가
     this.light = light;
 
-    SetupControls(this.camera, this.element);
+    SetupControls(this.camera, this.element); // 카메라 이동
 
     this.scene.add(light.light1);
     this.scene.add(light.light2);
-    this.scene.add(light.light2.target);
+    this.scene.add(light.light2.target); // 광원 scene에 추가
 
-    this.GlftLoader();
+    this.GlftLoader(); // 모델 불러오기
 
     window.onresize = this.resize.bind(this); // bind인 이유는 이벤트 객체가 아닌 App클래스의 객체가 되기 위해서
     this.resize();
 
-    this.animate();
+    this.animate(); // 애니메이션
   }
 
   GlftLoader() {
     const gltfLoader = new GLTFLoader();
-    const url = "scene.gltf";
+    const url = "scene.gltf"; // gltf가 있는 장소
     gltfLoader.load(url, (gltf) => {
       const root = gltf.scene;
       console.log(gltf);
       // this.scene.add(root);
-      console.log(this.dumpObject(root).join("\n"));
+      console.log(this.dumpObject(root).join("\n")); // gltf의 자식
       const planet = root.getObjectByName("GLTF_SceneRootNode");
       this.planet = planet;
 
-      this.setupModel();
+      this.setupModel(); // 모델 생성
     });
   }
 
@@ -87,13 +87,28 @@ class App extends React.Component {
 
   setupModel() {
     if (this.planet) {
-      const solarSystem = new THREE.Object3D();
-      const solarOrbit = new THREE.Object3D();
+      const solarSystem = new THREE.Object3D(); // 태양계 생성
+      const solarOrbit = new THREE.Object3D(); // 태양 자전
       this.solarOrbit = solarOrbit;
-      solarSystem.add(solarOrbit);
-      const sunMesh = this.planet.children[8];
-      sunMesh.position.set(0, 0, 0);
-      solarOrbit.add(sunMesh);
+      solarSystem.add(solarOrbit); // 태양계에 소속
+      const sunMesh = this.planet.children[8]; // 태양 추가
+      sunMesh.position.set(0, 0, 0); // 태양 위치
+      solarOrbit.add(sunMesh); // 태양
+
+      const mercuryOrbit = new THREE.Object3D(); // 수성 공전
+      this.mercuryOrbit = mercuryOrbit;
+      solarSystem.add(mercuryOrbit); // 태양계에 소속
+      const mercuryMesh = this.planet.children[2]; // 수성 추가
+      mercuryMesh.position.set(315, 0, 0); // 수성 위치
+      mercuryMesh.scale.set(25, 25, 25); // 수성 크기
+      mercuryOrbit.add(mercuryMesh); // 수성
+
+      const venusOrbit = new THREE.Object3D();
+      solarSystem.add(venusOrbit)
+      const venusMesh = this.planet.children[1];
+      venusMesh.position.set(415, 0, 0);
+      venusMesh.scale.set(22, 22, 22);
+      venusOrbit.add(venusMesh); // 금성
 
       const earthOrbit = new THREE.Object3D();
       solarSystem.add(earthOrbit);
@@ -102,28 +117,14 @@ class App extends React.Component {
       const earthMesh = this.planet.children[0];
       earthMesh.scale.set(18, 18, 18);
       earthMesh.position.set(500, 0, 0);
-      earth.add(earthMesh);
+      earth.add(earthMesh); // 지구
 
       const moonOrbit = new THREE.Object3D();
-      earth.add(moonOrbit);
-      const moonMesh = this.planet.children[9];
+      earth.add(moonOrbit); // 지구 자전에 달 공전 추가
+      const moonMesh = this.planet.children[8]; // 달 추가
       moonMesh.position.set(520, 0, 0);
       moonMesh.scale.set(2.5, 2.5, 2.5);
-      moonOrbit.add(moonMesh);
-
-      const mercuryOrbit = new THREE.Object3D();
-      solarSystem.add(mercuryOrbit);
-      const mercuryMesh = this.planet.children[1];
-      mercuryMesh.position.set(315, 0, 0);
-      mercuryMesh.scale.set(25, 25, 25);
-      mercuryOrbit.add(mercuryMesh);
-
-      const venusOrbit = new THREE.Object3D();
-      solarSystem.add(venusOrbit)
-      const venusMesh = this.planet.children[3];
-      venusMesh.position.set(415, 0, 0);
-      venusMesh.scale.set(2, 2, 2);
-      venusOrbit.add(venusMesh);
+      moonOrbit.add(moonMesh); // 달
 
       this.scene.add(solarSystem);
     }
@@ -149,7 +150,8 @@ class App extends React.Component {
     time *= 0.001;
     if (this.planet) {
       this.solarOrbit.rotation.y = time;
-    }
+      // this.mercuryOrbit.rotation.y = time;
+    } // 공전 & 자전
   }
 
   render() {
