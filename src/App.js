@@ -136,7 +136,7 @@ class App extends React.Component {
       this.marsMesh = marsMesh;
       marsMesh.position.set(1327, 0, 0);
       marsMesh.scale.set(64, 64, 64);
-      marsOrbit.add(marsMesh);
+      marsOrbit.add(marsMesh); // 화성
 
       const jupiterOrbit = new THREE.Object3D();
       this.jupiterOrbit = jupiterOrbit;
@@ -145,21 +145,21 @@ class App extends React.Component {
       this.jupiterMesh = jupiterMesh;
       jupiterMesh.position.set(1878, 0, 0);
       jupiterMesh.scale.set(18, 18, 18);
-      jupiterOrbit.add(jupiterMesh);
+      jupiterOrbit.add(jupiterMesh); // 목성
 
       const saturnOrbit = new THREE.Object3D();
       this.saturnOrbit = saturnOrbit;
       solarSystem.add(saturnOrbit);
-      const saturn = new THREE.Object3D();
+      const saturn = new THREE.Object3D(); // 화성 고리 + 화성
       this.saturn = saturn;
       saturn.position.set(2478, 0, 0);
       saturnOrbit.add(saturn);
       const saturnMesh = this.planet.children[0];
       saturnMesh.scale.set(16, 16, 16);
-      saturn.add(saturnMesh);
+      saturn.add(saturnMesh); // 화성
       const saturnRingMesh = this.planet.children[6];
       saturnRingMesh.scale.set(16,16,16);
-      saturn.add(saturnRingMesh);
+      saturn.add(saturnRingMesh); // 화성 고리
 
       console.log(this.dumpObject(this.root).join("\n")); // gltf의 자식
       this.scene.add(solarSystem);
