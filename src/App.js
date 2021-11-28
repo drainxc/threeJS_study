@@ -59,10 +59,11 @@ class App extends React.Component {
     gltfLoader.load(url, (gltf) => {
       const root = gltf.scene;
       console.log(gltf);
-      this.scene.add(root);
       console.log(this.dumpObject(root).join("\n"));
       const planet = root.getObjectByName("GLTF_SceneRootNode");
       this.planet = planet;
+
+      this.setupModel();
     });
   }
 
@@ -85,41 +86,40 @@ class App extends React.Component {
   setupModel() {
     if (this.planet) {
       const solarSystem = new THREE.Object3D();
-      const sun = sun.scale.set(3, 3, 3);
-      solarSystem.add(sun);
+      const solarOrbit = new THREE.Object3D();
+      solarSystem.add(solarOrbit);
+      const sunMesh = this.planet.children[8];
+      solarOrbit.add(sunMesh);
+      
+      // const earthOrbit = new THREE.Object3D();
+      // earthOrbit.position.x = 10;
+      // solarSystem.add(earthOrbit);
 
-      const earthOrbit = new THREE.Object3D();
-      earthOrbit.position.x = 10;
-      solarSystem.add(earthOrbit);
+      // const earthGeometry = new THREE.SphereGeometry(0.5, 12, 12);
+      // const earthMaterial = new THREE.MeshPhongMaterial({
+      //   color: 0x005fff,
+      //   emissive: 0x005fff,
+      //   fletShading: true,
+      // });
+      // const earth = new THREE.Mesh(earthGeometry, earthMaterial);
+      // earth.scale.set(3, 3, 3);
+      // earthOrbit.add(earth);
 
-      const earthGeometry = new THREE.SphereGeometry(0.5, 12, 12);
-      const earthMaterial = new THREE.MeshPhongMaterial({
-        color: 0x005fff,
-        emissive: 0x005fff,
-        fletShading: true,
-      });
-      const earth = new THREE.Mesh(earthGeometry, earthMaterial);
-      earth.scale.set(3, 3, 3);
-      earthOrbit.add(earth);
+      // const moonOrbit = new THREE.Object3D();
+      // moonOrbit.position.x = 2.5;
+      // earthOrbit.add(moonOrbit);
 
-      const moonOrbit = new THREE.Object3D();
-      moonOrbit.position.x = 2.5;
-      earthOrbit.add(moonOrbit);
+      // const moonGeometry = new THREE.SphereGeometry(0.2, 12, 12);
+      // const moonMaterial = new THREE.MeshPhongMaterial({
+      //   color: 0x888888,
+      //   emissive: 0x222222,
+      //   flatShading: true,
+      // });
+      // const moon = new THREE.Mesh(moonGeometry, moonMaterial);
+      // moon.scale.set(3.3, 3.3, 3.3);
+      // moonOrbit.add(moon);
 
-      const moonGeometry = new THREE.SphereGeometry(0.2, 12, 12);
-      const moonMaterial = new THREE.MeshPhongMaterial({
-        color: 0x888888,
-        emissive: 0x222222,
-        flatShading: true,
-      });
-      const moon = new THREE.Mesh(moonGeometry, moonMaterial);
-      moon.scale.set(3.3, 3.3, 3.3);
-      moonOrbit.add(moon);
-
-      const model = {
-        solarSystem: solarSystem,
-        earthOrbit: earthOrbit,
-      };
+      this.scene.add(solarSystem);
     }
   }
 
