@@ -88,6 +88,7 @@ class App extends React.Component {
     if (this.planet) {
       const solarSystem = new THREE.Object3D();
       const solarOrbit = new THREE.Object3D();
+      this.solarOrbit = solarOrbit;
       solarSystem.add(solarOrbit);
       const sunMesh = this.planet.children[8];
       sunMesh.position.set(0,0,0);
@@ -139,7 +140,7 @@ class App extends React.Component {
   update(time) {
     time *= 0.001;
     if (this.planet) {
-      // this.solarOrbit.rotation.y = time;
+      this.solarOrbit.rotation.y = time;
     }
   }
 
