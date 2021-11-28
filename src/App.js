@@ -88,23 +88,22 @@ class App extends React.Component {
   setupModel() {
     if (this.planet) {
       const solarSystem = new THREE.Object3D(); // 태양계 생성
-      const solarOrbit = new THREE.Object3D(); // 태양 자전
-      this.solarOrbit = solarOrbit;
-      solarSystem.add(solarOrbit); // 태양계에 소속
       const sunMesh = this.planet.children[8]; // 태양 추가
+      this.sunMesh = sunMesh;
       sunMesh.position.set(0, 0, 0); // 태양 위치
-      solarOrbit.add(sunMesh); // 태양
+      solarSystem.add(sunMesh); // 태양
 
       const mercuryOrbit = new THREE.Object3D(); // 수성 공전
       this.mercuryOrbit = mercuryOrbit;
       solarSystem.add(mercuryOrbit); // 태양계에 소속
       const mercuryMesh = this.planet.children[2]; // 수성 추가
+      this.mercuryMesh = mercuryMesh;
       mercuryMesh.position.set(315, 0, 0); // 수성 위치
       mercuryMesh.scale.set(25, 25, 25); // 수성 크기
       mercuryOrbit.add(mercuryMesh); // 수성
 
       const venusOrbit = new THREE.Object3D();
-      solarSystem.add(venusOrbit)
+      solarSystem.add(venusOrbit);
       const venusMesh = this.planet.children[1];
       venusMesh.position.set(415, 0, 0);
       venusMesh.scale.set(22, 22, 22);
@@ -113,18 +112,18 @@ class App extends React.Component {
       const earthOrbit = new THREE.Object3D();
       solarSystem.add(earthOrbit);
       const earth = new THREE.Object3D();
+      this.earth = earth;
+      earth.position.set(500, 0, 0);
       earthOrbit.add(earth);
       const earthMesh = this.planet.children[0];
       earthMesh.scale.set(18, 18, 18);
-      earthMesh.position.set(500, 0, 0);
+      earthMesh.position.set(0, 0, 0);
       earth.add(earthMesh); // 지구
 
-      const moonOrbit = new THREE.Object3D();
-      earth.add(moonOrbit); // 지구 자전에 달 공전 추가
       const moonMesh = this.planet.children[8]; // 달 추가
-      moonMesh.position.set(520, 0, 0);
+      moonMesh.position.set(20, 0, 0);
       moonMesh.scale.set(2.5, 2.5, 2.5);
-      moonOrbit.add(moonMesh); // 달
+      earth.add(moonMesh); // 달
 
       this.scene.add(solarSystem);
     }
@@ -149,7 +148,9 @@ class App extends React.Component {
   update(time) {
     time *= 0.001;
     if (this.planet) {
-      this.solarOrbit.rotation.y = time;
+      // this.sunMesh.rotation.y = time;
+      // this.mercuryMesh.rotation.y = time;
+      // this.earth.rotation.y = time;
       // this.mercuryOrbit.rotation.y = time;
     } // 공전 & 자전
   }
