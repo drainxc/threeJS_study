@@ -92,6 +92,7 @@ class App extends React.Component {
       const sunMesh = this.planet.children[8]; // 모델 추가
       this.sunMesh = sunMesh;
       sunMesh.position.set(0, 0, 0); // 위치
+      sunMesh.scale.set(4, 4, 4);
       solarSystem.add(sunMesh); // 태양
 
       const mercuryOrbit = new THREE.Object3D(); // 공전
@@ -99,8 +100,8 @@ class App extends React.Component {
       solarSystem.add(mercuryOrbit); // 태양계에 소속
       const mercuryMesh = this.planet.children[2];
       this.mercuryMesh = mercuryMesh;
-      mercuryMesh.position.set(357, 0, 0);
-      mercuryMesh.scale.set(25, 25, 25); // 크기
+      mercuryMesh.position.set(657, 0, 0);
+      mercuryMesh.scale.set(100, 100, 100); // 크기
       mercuryOrbit.add(mercuryMesh); // 수성
 
       const venusOrbit = new THREE.Object3D();
@@ -108,24 +109,24 @@ class App extends React.Component {
       solarSystem.add(venusOrbit);
       const venusMesh = this.planet.children[1];
       this.venusMesh = venusMesh;
-      venusMesh.position.set(408, 0, 0);
-      venusMesh.scale.set(22, 22, 22);
+      venusMesh.position.set(908, 0, 0);
+      venusMesh.scale.set(88, 88, 88);
       venusOrbit.add(venusMesh); // 금성
 
       const earthOrbit = new THREE.Object3D();
       solarSystem.add(earthOrbit);
       const earth = new THREE.Object3D();
       this.earth = earth;
-      earth.position.set(449, 0, 0);
+      earth.position.set(1149, 0, 0);
       earthOrbit.add(earth);
       const earthMesh = this.planet.children[0];
-      earthMesh.scale.set(18, 18, 18);
+      earthMesh.scale.set(72, 72, 72);
       earthMesh.position.set(0, 0, 0);
       earth.add(earthMesh); // 지구
 
       const moonMesh = this.planet.children[8]; // 달 추가
-      moonMesh.position.set(20, 0, 0);
-      moonMesh.scale.set(2.5, 2.5, 2.5);
+      moonMesh.position.set(60, 0, 0);
+      moonMesh.scale.set(10, 10, 10);
       earth.add(moonMesh); // 달
 
       const marsOrbit = new THREE.Object3D();
@@ -133,8 +134,8 @@ class App extends React.Component {
       solarSystem.add(marsOrbit);
       const marsMesh = this.planet.children[0];
       this.marsMesh = marsMesh;
-      marsMesh.position.set(527, 0, 0);
-      marsMesh.scale.set(16, 16, 16);
+      marsMesh.position.set(1327, 0, 0);
+      marsMesh.scale.set(64, 64, 64);
       marsOrbit.add(marsMesh);
 
       const jupiterOrbit = new THREE.Object3D();
@@ -142,9 +143,20 @@ class App extends React.Component {
       solarSystem.add(jupiterOrbit);
       const jupiterMesh = this.planet.children[0];
       this.jupiterMesh = jupiterMesh;
-      jupiterMesh.position.set(1078, 0, 0);
-      jupiterMesh.scale.set(11, 11, 11);
+      jupiterMesh.position.set(1878, 0, 0);
+      jupiterMesh.scale.set(18, 18, 18);
       jupiterOrbit.add(jupiterMesh);
+
+      console.log(this.dumpObject(this.root).join("\n"));
+
+      const saturnOrbit = new THREE.Object3D();
+      this.saturnOrbit = saturnOrbit;
+      solarSystem.add(saturnOrbit);
+      const saturnMesh = this.planet.children[0];
+      this.saturnMesh = saturnMesh;
+      saturnMesh.position.set(2478, 0, 0);
+      saturnMesh.scale.set(16, 16, 16);
+      saturnOrbit.add(saturnMesh);
 
       this.scene.add(solarSystem);
     }
