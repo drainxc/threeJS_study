@@ -88,8 +88,10 @@ class App extends React.Component {
     if (this.planet) {
       const solarSystem = new THREE.Object3D();
       const solarOrbit = new THREE.Object3D();
+      this.solarOrbit = solarOrbit;
       solarSystem.add(solarOrbit);
       const sunMesh = this.planet.children[8];
+      sunMesh.position.set(0,0,0);
       solarOrbit.add(sunMesh);
 
       const earthOrbit = new THREE.Object3D();
@@ -98,28 +100,15 @@ class App extends React.Component {
       solarOrbit.add(earth);
       const earthMesh = this.planet.children[0];
       earthMesh.scale.set(20,20,20);
+      earthMesh.position.set(300,0,0)
       earth.add(earthMesh);
 
       const moonOrbit = new THREE.Object3D();
       earth.add(moonOrbit);
       const moonMesh = this.planet.children[9];
-      moonMesh.position.z = -18;
+      moonMesh.position.set(320,0,0)
       moonMesh.scale.set(2,2,2);
       moonOrbit.add(moonMesh);
-
-      // const moonOrbit = new THREE.Object3D();
-      // moonOrbit.position.x = 2.5;
-      // earthOrbit.add(moonOrbit);
-
-      // const moonGeometry = new THREE.SphereGeometry(0.2, 12, 12);
-      // const moonMaterial = new THREE.MeshPhongMaterial({
-      //   color: 0x888888,
-      //   emissive: 0x222222,
-      //   flatShading: true,
-      // });
-      // const moon = new THREE.Mesh(moonGeometry, moonMaterial);
-      // moon.scale.set(3.3, 3.3, 3.3);
-      // moonOrbit.add(moon);
 
       this.scene.add(solarSystem);
     }
@@ -144,9 +133,7 @@ class App extends React.Component {
   update(time) {
     time *= 0.001;
     if (this.planet) {
-      for (const model of this.planet.children) {
-        if (model !== this.planet.children[15]) model.rotation.y = time;
-      }
+      // this.solarOrbit.rotation.y = time;
     }
   }
 
