@@ -137,6 +137,15 @@ class App extends React.Component {
       marsMesh.scale.set(22, 22, 22);
       marsOrbit.add(marsMesh);
 
+      const jupiterOrbit = new THREE.Object3D();
+      this.jupiterOrbit = jupiterOrbit;
+      solarSystem.add(jupiterOrbit);
+      const jupiterMesh = this.planet.children[0];
+      this.jupiterMesh = jupiterMesh;
+      jupiterMesh.position.set(1756, 0, 0);
+      jupiterMesh.scale.set(22, 22, 22);
+      jupiterOrbit.add(jupiterMesh);
+
       this.scene.add(solarSystem);
     }
   }
