@@ -159,6 +159,7 @@ class App extends React.Component {
       saturn.add(saturnMesh); // 화성
       const saturnRingMesh = this.planet.children[6];
       saturnRingMesh.scale.set(16,16,16);
+      saturnRingMesh.rotation.x = 10;
       saturn.add(saturnRingMesh); // 화성 고리
 
       console.log(this.dumpObject(this.root).join("\n")); // gltf의 자식
