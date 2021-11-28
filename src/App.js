@@ -99,7 +99,7 @@ class App extends React.Component {
       solarSystem.add(mercuryOrbit); // 태양계에 소속
       const mercuryMesh = this.planet.children[2];
       this.mercuryMesh = mercuryMesh;
-      mercuryMesh.position.set(315, 0, 0);
+      mercuryMesh.position.set(357, 0, 0);
       mercuryMesh.scale.set(25, 25, 25); // 크기
       mercuryOrbit.add(mercuryMesh); // 수성
 
@@ -108,7 +108,7 @@ class App extends React.Component {
       solarSystem.add(venusOrbit);
       const venusMesh = this.planet.children[1];
       this.venusMesh = venusMesh;
-      venusMesh.position.set(415, 0, 0);
+      venusMesh.position.set(408, 0, 0);
       venusMesh.scale.set(22, 22, 22);
       venusOrbit.add(venusMesh); // 금성
 
@@ -116,7 +116,7 @@ class App extends React.Component {
       solarSystem.add(earthOrbit);
       const earth = new THREE.Object3D();
       this.earth = earth;
-      earth.position.set(500, 0, 0);
+      earth.position.set(449, 0, 0);
       earthOrbit.add(earth);
       const earthMesh = this.planet.children[0];
       earthMesh.scale.set(18, 18, 18);
@@ -133,8 +133,8 @@ class App extends React.Component {
       solarSystem.add(marsOrbit);
       const marsMesh = this.planet.children[0];
       this.marsMesh = marsMesh;
-      marsMesh.position.set(654, 0, 0);
-      marsMesh.scale.set(22, 22, 22);
+      marsMesh.position.set(527, 0, 0);
+      marsMesh.scale.set(16, 16, 16);
       marsOrbit.add(marsMesh);
 
       const jupiterOrbit = new THREE.Object3D();
@@ -142,8 +142,8 @@ class App extends React.Component {
       solarSystem.add(jupiterOrbit);
       const jupiterMesh = this.planet.children[0];
       this.jupiterMesh = jupiterMesh;
-      jupiterMesh.position.set(1756, 0, 0);
-      jupiterMesh.scale.set(22, 22, 22);
+      jupiterMesh.position.set(1078, 0, 0);
+      jupiterMesh.scale.set(11, 11, 11);
       jupiterOrbit.add(jupiterMesh);
 
       this.scene.add(solarSystem);
