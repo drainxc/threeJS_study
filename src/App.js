@@ -6,6 +6,7 @@ import GlovalStyle from "./styles/styles";
 import * as THREE from "three";
 import { SetupControls } from "./lib/function/Controls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { Object3D } from "three";
 
 class App extends React.Component {
   constructor(props) {
@@ -79,15 +80,21 @@ class App extends React.Component {
 
   setupModel() {
     if (this.planet) {
+<<<<<<< HEAD
       const backGround = this.planet.children[15];
       backGround.scale.set(5000, 5000, 5000);
       this.scene.add(backGround);
 
+=======
+>>>>>>> master
       const solarSystem = new THREE.Object3D(); // 태양계 생성
       const sunMesh = this.planet.children[8]; // 모델 추가
       this.sunMesh = sunMesh;
       sunMesh.position.set(0, 0, 0); // 위치
+<<<<<<< HEAD
       sunMesh.scale.set(4, 4, 4);
+=======
+>>>>>>> master
       solarSystem.add(sunMesh); // 태양
 
       const mercuryOrbit = new THREE.Object3D(); // 공전
@@ -95,8 +102,13 @@ class App extends React.Component {
       solarSystem.add(mercuryOrbit); // 태양계에 소속
       const mercuryMesh = this.planet.children[2];
       this.mercuryMesh = mercuryMesh;
+<<<<<<< HEAD
       mercuryMesh.position.set(657, 0, 0);
       mercuryMesh.scale.set(100, 100, 100); // 크기
+=======
+      mercuryMesh.position.set(315, 0, 0);
+      mercuryMesh.scale.set(25, 25, 25); // 크기
+>>>>>>> master
       mercuryOrbit.add(mercuryMesh); // 수성
 
       const venusOrbit = new THREE.Object3D();
@@ -104,24 +116,41 @@ class App extends React.Component {
       solarSystem.add(venusOrbit);
       const venusMesh = this.planet.children[1];
       this.venusMesh = venusMesh;
+<<<<<<< HEAD
       venusMesh.position.set(908, 0, 0);
       venusMesh.scale.set(88, 88, 88);
+=======
+      venusMesh.position.set(415, 0, 0);
+      venusMesh.scale.set(22, 22, 22);
+>>>>>>> master
       venusOrbit.add(venusMesh); // 금성
 
       const earthOrbit = new THREE.Object3D();
       solarSystem.add(earthOrbit);
       const earth = new THREE.Object3D();
       this.earth = earth;
+<<<<<<< HEAD
       earth.position.set(1149, 0, 0);
       earthOrbit.add(earth);
       const earthMesh = this.planet.children[0];
       earthMesh.scale.set(72, 72, 72);
+=======
+      earth.position.set(500, 0, 0);
+      earthOrbit.add(earth);
+      const earthMesh = this.planet.children[0];
+      earthMesh.scale.set(18, 18, 18);
+>>>>>>> master
       earthMesh.position.set(0, 0, 0);
       earth.add(earthMesh); // 지구
 
       const moonMesh = this.planet.children[8]; // 달 추가
+<<<<<<< HEAD
       moonMesh.position.set(60, 0, 0);
       moonMesh.scale.set(10, 10, 10);
+=======
+      moonMesh.position.set(20, 0, 0);
+      moonMesh.scale.set(2.5, 2.5, 2.5);
+>>>>>>> master
       earth.add(moonMesh); // 달
 
       const marsOrbit = new THREE.Object3D();
@@ -129,6 +158,7 @@ class App extends React.Component {
       solarSystem.add(marsOrbit);
       const marsMesh = this.planet.children[0];
       this.marsMesh = marsMesh;
+<<<<<<< HEAD
       marsMesh.position.set(1327, 0, 0);
       marsMesh.scale.set(64, 64, 64);
       marsOrbit.add(marsMesh); // 화성
@@ -158,6 +188,12 @@ class App extends React.Component {
       saturn.add(saturnRingMesh); // 화성 고리
 
       console.log(this.dumpObject(this.root).join("\n")); // gltf의 자식
+=======
+      marsMesh.position.set(654, 0, 0);
+      marsMesh.scale.set(22, 22, 22);
+      marsOrbit.add(marsMesh);
+
+>>>>>>> master
       this.scene.add(solarSystem);
     }
   }
