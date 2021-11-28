@@ -88,7 +88,6 @@ class App extends React.Component {
     if (this.planet) {
       const solarSystem = new THREE.Object3D();
       const solarOrbit = new THREE.Object3D();
-      this.solarOrbit = solarOrbit;
       solarSystem.add(solarOrbit);
       const sunMesh = this.planet.children[8];
       sunMesh.position.set(0,0,0);
@@ -97,7 +96,7 @@ class App extends React.Component {
       const earthOrbit = new THREE.Object3D();
       solarSystem.add(earthOrbit);
       const earth = new THREE.Object3D();
-      solarOrbit.add(earth);
+      earthOrbit.add(earth);
       const earthMesh = this.planet.children[0];
       earthMesh.scale.set(20,20,20);
       earthMesh.position.set(300,0,0)
@@ -109,6 +108,13 @@ class App extends React.Component {
       moonMesh.position.set(320,0,0)
       moonMesh.scale.set(2,2,2);
       moonOrbit.add(moonMesh);
+
+      const mercuryOrbit = new THREE.Object3D();
+      solarSystem.add(mercuryOrbit);
+      const mercuryMesh = this.planet.children[1];
+      mercuryMesh.position.set(250, 0, 0);
+      mercuryMesh.scale.set(20,20,20);
+      mercuryOrbit.add(mercuryMesh);
 
       this.scene.add(solarSystem);
     }
