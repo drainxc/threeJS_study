@@ -87,7 +87,7 @@ class App extends React.Component {
       const sunMesh = this.planet.children[8]; // 모델 추가
       this.sunMesh = sunMesh;
       sunMesh.position.set(0, 0, 0); // 위치
-      sunMesh.scale.set(5, 5, 5);
+      sunMesh.scale.set(7, 7, 7);
       solarSystem.add(sunMesh); // 태양
 
       const mercuryOrbit = new THREE.Object3D(); // 공전
@@ -116,14 +116,19 @@ class App extends React.Component {
       earth.position.set(1149, 0, 0);
       earthOrbit.add(earth);
       const earthMesh = this.planet.children[0];
+      this.earthMesh = earthMesh;
       earthMesh.scale.set(72, 72, 72);
       earthMesh.position.set(0, 0, 0);
       earth.add(earthMesh); // 지구
 
-      const moonMesh = this.planet.children[8]; // 달 추가
+      const moonOrbit = new THREE.Object3D();
+      this.moonOrbit = moonOrbit;
+      earth.add(moonOrbit);
+      const moonMesh = this.planet.children[8];
+      this.moonMesh = moonMesh;
       moonMesh.position.set(60, 0, 0);
       moonMesh.scale.set(10, 10, 10);
-      earth.add(moonMesh); // 달
+      moonOrbit.add(moonMesh); // 달
 
       const marsOrbit = new THREE.Object3D();
       this.marsOrbit = marsOrbit;
@@ -199,12 +204,13 @@ class App extends React.Component {
   };
 
   update(time) {
-    time *= 0.001;
+    time *= 0.0001;
     if (this.planet) {
       this.sunMesh.rotation.y = time / 25.4;
       this.mercuryMesh.rotation.y = time / 58.8;
       this.venusMesh.rotation.y = -time / 243;
-      this.earth.rotation.y = time;
+      this.earthMesh.rotation.y = time * 363;
+      this.moonMesh.rotation.y = time * 2;
       this.marsMesh.rotation.y = time / 1.02;
       this.jupiterMesh.rotation.y = time * 2.43;
       this.saturn.rotation.y = time * 2.33;
@@ -214,6 +220,7 @@ class App extends React.Component {
       this.mercuryOrbit.rotation.y = time * 4.14;
       this.venusOrbit.rotation.y = time * 1.62;
       this.earthOrbit.rotation.y = time;
+      this.moonOrbit.rotation.y = time * 2;
       this.marsOrbit.rotation.y = time * 0.53;
       this.jupiterOrbit.rotation.y = time * 0.08;
       this.saturnOrbit.rotation.y = time * 0.03;
