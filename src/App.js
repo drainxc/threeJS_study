@@ -201,8 +201,8 @@ class App extends React.Component {
   update(time) {
     time *= 0.001;
     if (this.planet) {
-      this.sunMesh.rotation.y = time / 25;
-      this.mercuryMesh.rotation.y = time / 58;
+      this.sunMesh.rotation.y = time / 25.4;
+      this.mercuryMesh.rotation.y = time / 58.8;
       this.venusMesh.rotation.y = -time / 243;
       this.earth.rotation.y = time;
       this.marsMesh.rotation.y = time / 1.02;
