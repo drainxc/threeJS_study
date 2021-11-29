@@ -209,8 +209,17 @@ class App extends React.Component {
       this.jupiterMesh.rotation.y = time * 2.43;
       this.saturn.rotation.y = time * 2.33;
       this.uranusMesh.rotation.y = -time * 1.38;
-      this.neptuneMesh.rotation.y = time * 1.48;
-    } // 공전 & 자전
+      this.neptuneMesh.rotation.y = time * 1.48; // 자전
+
+      this.mercuryOrbit.rotation.y = time * 4.14;
+      this.venusOrbit.rotation.y = time * 1.62;
+      this.earthOrbit.rotation.y = time;
+      this.marsOrbit.rotation.y = time * 0.53;
+      this.jupiterOrbit.rotation.y = time * 0.08;
+      this.saturnOrbit.rotation.y = time * 0.03;
+      this.uranusOrbit.rotation.y = time * 0.011;
+      this.neptuneOrbit.rotation.y = time * 0.006;
+    }
   }
 
   render() {
